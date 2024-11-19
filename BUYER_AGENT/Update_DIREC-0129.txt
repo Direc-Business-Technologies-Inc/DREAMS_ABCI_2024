@@ -1,0 +1,754 @@
+TASKS 
+
+############################################################################################################## 
+08-27-2020
+
+RESTRUCTURING
+	-Loading of Details when selecting BP 
+		-Documents Uploaded details
+		-House/Lot Details
+		-Summary Details
+			-Computation
+	-Computation of Details when going to next page	
+		-Payment Terms tab
+	
+	
+MASAITO BUYER'S LEDGER
+	Wala pala silang pasok today
+	
+	
+##############################################################################################################
+08-28-2020	
+
+MASAITO Buyer's LEDGER	
+	-Blocking Date should be Booking Date
+	-Sales Type should be the TERMS in the Template not the Price Category
+	-Net DP (for upcoming sales / bookings) should display Inputted Net DP
+	-% of DP (for upcoming sales / bookings) should compute as DP Paid / Net DP (with 2 decimal places)
+	-Fixed breakdown of Downpayments and Loanables
+	-For Clarifications: 
+		-Model Name should be Model + Size
+		-Running total for Principal Column (Breakdown)
+	
+RESTRUCTURING
+	-Clear Necessary fields for refreshing of page
+	-Decluttered codes on loading of:
+		- HOUSELOT DETAILS
+		- DATA FOR HIDDEN CONTROLS [Content3]
+		- Project Info Tab
+		- Hidden Fields for Computations
+		
+		
+		
+		
+##############################################################################################################
+09-01-2020	
+
+ABROW DREAMS
+	-Ongoing Restructuring Checking (Found some inconsistent fields in OQUT addon table)
+		-Restructuring new SP
+			-GetAccountComputedTotals
+				-For clearer pulling of data from Quotation
+		-Cleaning Quotation Table 
+			-To be finalized if the columns are to be kept or deleted (Not sure yet which forms/reports and modules will be affected if the specified columns are removed)
+				-ItemCodeOC (Always Null)
+				-NetDisc (same value with  oDAS column if from DREAMS; NULL if from BegBal Uploader)
+				-TCP (same values with oTCP column)
+			-Computed fields not included on saving to Database: (These are being computed back again in Restructuring instead of just pulling data directly from Addon database)
+				-2nd Net DAS (lblNetDAS2)
+				-Downpayment Due Date (lblDueDate1)
+				-Additional Charges (lblAddCharges)
+				-Additional Charges Due Date (lblDueDate2)
+				-Loanable Amount Monthly (lblMonthly2)
+				-Loanable Due Date (lblDueDate3) 
+				
+				
+##############################################################################################################
+09-02-2020			
+		
+ABROW DREAMS
+	-Quotation Stored Procedure Updating
+		-Added Fields:
+			-NetDAS2
+			-lblAddCharges
+			-DueDate2
+			-LB Monthly
+			-LB DueDate 
+		-Loading of Data when selecting an existing Transaction 
+		-Saving of Quotation with new fields
+		-Updating of Quotation with new Fields
+	-Restructuring Computation SP DONE
+		-Cleaning of unused fields
+		-Pulling data from Quotation Table
+	-Deployed a copy to DEMO Server
+	
+##############################################################################################################
+09-03-2020			
+	
+ABROWN DREAMS	
+	-Restructuring
+		-DONE | Loading of Data when selecting an existing Quotation Transaction
+			-Had to re-call the data to the controls one by one
+		-DONE Removed unused and duplicate fields/contrls
+			-When removing the controls on the display, issues arise on the back-end since it's the controls are missing; have to allocate temporary fields first	
+		-DONE | Moved 'Computation' to its own table
+		-ONGOING | Computation of Fields
+		-PENDING | Update Restructure Saving (with Textbox controls only) 
+PLS
+	-Screenshots for Webinar (requested by Min)
+		
+		
+##############################################################################################################
+09-04-2020	
+
+ABROWN DREAMS	
+	-ONGOING BPA ZOOM MEETING
+	-Problem with viewing of Images in curent ABROWN DREAMS Solution
+		-FIXED: Namespace inconsistencies on specific pages
+	-Restructuring
+		-DONE: Payment Terms Tab
+		-FIXED: Selection of new Block and Lot (Images does not load)
+		-ONGOING: Summary Tab
+			-ONGOING: Computation will take effect here; Transfer of computations to SP here
+		
+
+##############################################################################################################
+09-07-2020	
+
+ABROWN DREAMS
+	-Restructuring
+		-New Tab in left pane: NEW Computation
+			-Real-time loading of computed amounts
+			
+
+##############################################################################################################
+09-14-2020	
+
+ABROWN DREAMS	
+	-Testing Quotation
+		-References of the fields being generated (From SAP)
+		
+	
+
+##############################################################################################################
+09-16-2020	
+
+RPI Support
+	-AGENTS in Quotation
+	
+
+
+##############################################################################################################
+09-21-2020	
+	
+RPI Support
+		 1. [DONE] - Balance Deduction 
+		 2. [DONE] - Principal Total
+		 3. [DONE] - Total Balance as of to date displays 0 amount 
+		 4. [DONE] - Net DP and DP Paid Application to Rows  
+		 5. [DONE] - MA Principal Amount
+		 6. [FOR CLARIFICATION] Some MHT3 Transactions are not uploaded in Addon but exists in SAP
+		 7. [FOR CLARIFICATION] Credit Memo to zero out the account
+		 8. [FOR CLARIFICATION] Multiple payments with recurring postings (Duplicate rows)
+		 9. [FOR CLARIFICATION] Total Principal Confirmation
+		 10.[DONE] - DP Paid  
+		 
+ABROWN DREAMS
+	-Restructuring (Run-through with Gen and Ralph)
+		-FIXED: Multiple "Block and Lot" on a single Buyer
+		-DONE: Change old computation color
+		-FIXED: Old Monthly Loanable did not load
+		-FIXED: Total Payment Application on Certain Amounts
+		-ONGOING: Change owner - Will not change BP code, only owner field
+ 
+			
+
+##############################################################################################################
+09-22-2020	
+
+RPI Support
+		 [DONE] - Balance Deduction 
+		 [DONE] - Principal Total
+		 [DONE] - Total Balance as of to date displays 0 amount 
+		 [DONE] - Net DP and DP Paid Application to Rows  
+		 [DONE] - MA Principal Amount
+		 [DONE] Total Principal Confirmation
+		 [FOR CLIENT VALIDATION] Credit Memo to zero out the account (Solution emailed by Gen)
+		 [FOR CLIENT VALIDATION] Multiple payments with recurring postings (Duplicate rows; fixed in Crystal Report)
+		 [FOR CLIENT CLARIFICATION] Requested posting of payments did not reflect in Dreams 
+							(Terms in template are duplicates; to be confirmed with Sir Gelo, terms should not be the same)
+		 [CHECKING] Details in upload file does not tally with the balance uploaded (Check template; will follow up for the raw OB file to Sir Gelo)
+		 [CHECKING] Incorrect Details (Block and Lot) uploaded (Check template; will follow up for the raw OB file to Sir Gelo)
+		 [CHECKING] Some MHT3 Transactions are not uploaded in Addon but exists in SAP (Check template; will follow up for the raw OB file to Sir Gelo)
+
+
+
+
+##############################################################################################################
+09-28-2020	
+
+RPI DREAMS 
+	Advance Payment
+		Quotation
+			UI
+				Added new field in Computation
+				Added new textbox for input
+			Computation
+				Monthly Downpayment Amount = (Downpayment Amount - Advance Payment) / DP Terms
+			Additional Column in Addon DB
+			Adjusted SP for pulling and saving data
+		
+
+##############################################################################################################
+09-29-2020	
+
+RPI Dreams
+	Change Requeste - Advance Payment
+		Payment Application to Reservation Fee and Advance Payment - DONE
+		Saving to Addon DB and Posting to SAP	
+			Added columns on QUT1, QUT2, and QUT3 (for Reservation / Advance Payment tagging) DONE
+			Post AR DP Request to SAP for Advance Payment ONGOING
+		
+
+##############################################################################################################
+09-30-2020	
+
+RPI DREAMS
+	Posting to SAP
+		Adjusted codes for Posting
+		Specific SPs:
+			AddReservationPayments /
+			DuePayments /
+			CreateDownPayment /
+			AddReservationPayments /
+			GetAllReservationPayments /
+			getQuotationData /
+			sp_GetQuotationByID /
+			sp_Quotation /
+		Additional Columns on Table
+			OQUT / 
+			QUT2 /
+			QUT3 / 
+			QUT4 /
+			OPYT /
+		
+		RGP Rate on [@HOUSE_MODEL]
+			Ex. Code = Bailey has no RGP Rate
+		Posting Period Unlock	
+		
+##############################################################################################################
+10-01-2020	
+
+MCWM
+	- WB No generation shall base on the latest WBNo from Addon Database (addon server now)
+	- Offline feature
+		- Saving of transactions by default will be on Addon Server
+		- If units are disconnected from Addon Server, Unit 1 will be the acting server
+			- consdering this, every transactions will be saved on Addon Server and to Unit 1
+		- If Unit 1 is down, shall we consider giving Unit 2 its own Database?
+		- 
+
+
+
+
+
+
+
+
+##############################################################################################################
+##############################################################################################################
+##############################################################################################################
+##############################################################################################################
+##############################################################################################################
+##############################################################################################################
+##############################################################################################################
+##############################################################################################################
+##############################################################################################################
+##############################################################################################################
+
+10-07-2020	
+
+	-Deployed all needed tables to HANA Server
+	-Added 'admin' to table OUSR
+	-Adjusted to HANA queries in coding
+	
+Converted to HANA:
+	Login
+		Checking of password
+		Checking of role
+	User Management
+		GetUsers
+		GetUserRole
+		LoadModuleList
+		SetupOUSR
+		SetOUSR
+		DeleteRole
+		DeleteMode
+		SetMode
+		SetRole
+		GetUserByID
+		GetUserRolesByID 
+		
+
+##############################################################################################################
+10-(8,9)-2020	
+
+Converted to HANA:
+	Stored Proc:
+		10-8
+		User Management
+			SP_SetInRole /
+			SP_SetUpOUSR /
+			sp_AutoKey /
+			sp_SetInOUSR / 
+			sp_SetInMODE/
+			sp_GetUserByID /
+			sp_GetUserRolesByID /
+
+
+##############################################################################################################
+10-(8,9)-2020	
+	Backend Functions
+		Administration
+			GetDocumentStatus	(Need Configuration to SAP) -- DONE
+			GetValidValues
+			GetFinancingScheme
+			GetDocumentsList
+			GetRoles
+			AddColor
+			UpdateColor
+			btnSave_Click
+			UpdateValidValues
+			GetTerms
+			AddDocumentRequirements
+			bSelectBuyer_Click
+			btnYes_Click
+			
+	Stored Proc
+		Administration
+			DocumentStatus (Need Configuration to SAP -- DONE)  /
+			getValidValues /
+			sp_GetFinancingScheme /
+			DocumentsList /
+			getRoles /
+			addColor /
+			UpdateColor  /
+			updateValidValues /
+			sp_GetTerms /
+			addDocuments  /
+
+##############################################################################################################
+10-12-2020	
+	Backend Functions
+		Document Requirements
+			GetUserRoles
+			GetRequieredDocuments
+			GetDocPerCode
+			UpdateDocumentCode
+		Cleanup Documents
+			CleanupQuotationReservation
+			CleanBuyer
+		Documents
+			GetDocStatusID
+			GetDocStatusName
+			GetSeqId
+			GetDocuments
+			BPList
+			GetQuotationData
+			GetPaymentSchedule
+			btnYes_Click
+			 
+	Stored Procs
+		Document Requirements
+			GetDocPerCode /
+			UpdateDocCode /
+		CleanUp Documents
+			CleanupQuotationReservation /
+			CleanBuyer	/
+		Documents	
+			GetSeqId /
+			sp_DocList /
+			getQuotationData /
+			GetPaymentSchedule /
+			
+			
+			
+##############################################################################################################
+10-13-2020	 
+	Backend Functions	
+		Documents
+			GetSODocEntry
+			CreateSO (IN NEED OF SAP DATABASE; ONGOING)
+			AddDocuments
+			AddRole
+			DeleteImage
+	Stored Procs
+		Documents
+			sp_GetSODocEntry  (Need Configuration to SAP) -- DONE EXECUTE IMMEDIATE /
+			sp_addDocuments /
+			AddRoles /
+			sp_DeleteImg /
+			
+##############################################################################################################
+10-14-2020	 			 
+	Added UDT in SAP DB (with its specified UDFs)
+		Supplied data from MDC DATABASE
+		Fixed DocumentStatus Stored Proc
+		
+	Backend Functions	
+		Projects		
+			GetProjects
+			GetSAPProjects
+			GetBlockList
+			GetBlockByProject
+			btnNext_Click
+			btnSaveBlock_Click
+			UpdateProjectBlock
+			DeleteBlockTemp
+			UpdateProjectBlockNoImage	
+			AddNewProjectBlock
+			DeleteBlock
+			DeleteLot
+			btnYes_Click
+			GetLotList
+			gvBLockList_RowCommand
+			gvSAPLot_RowCommand
+			gvSAPBlocks_RowCommand
+			btnSaveLot_Click
+			UpdateProjectLot
+	Stored Proc
+		Projects
+			projectBlocks  /
+			updateProjectBlock /
+			updateProjectBlockNoImage /
+			addProjectBlock /
+			projectLots /
+			updateProjectLot /
+			
+##############################################################################################################
+10-15-2020	 	
+
+	Backend Functions	
+		Projects
+			AddNewProjectLot
+			gvProjectList_RowCommand
+			btnSaveLot_ServerClick
+			DeleteLotTemp
+			btnLotPreview_ServerClick
+			UpdateBlockTemp
+			DeleteTemp
+			GetProjectBlocks
+			UpdateImageProjectBlock
+			btnUpload_ServerClick
+			AddNewProject
+			btnUpdateBlockLocation_ServerClick
+			UpdateBlockLocation
+			SearchSAPProjects
+		Buyer's Information
+			InitializeSPA
+			GetCountID
+			AddSPADependent		
+			select_temp_crd2
+			btnEmployment_ServerClick
+			GetOLSTName
+			btnFind_ServerClick			
+			bSearch_ServerClick
+			bSelectBuyer_Click
+			OLSTExist 
+			DeleteSPADependent
+			BPDelete	
+			LastActivityDate		
+			insert_temp__crd5			
+			select_temp_crd5
+			DeleteListSPA
+	Stored Proc
+		Projects
+			addLotPerProject	 /
+			updateBlockTemp (CANT ADD THIS SP BECAUSE IT IS LOOKING FOR TMP1 TABLE WHICH IS A TEMPORARY TABLE; WILL BE CONFIRMED IF DATA IS AVAILABLE ON SAP DB)
+			GetProjectBlocks  /
+			UpdateImageProjectBlock  /
+			AddProject /
+			UpdateBlockLocation /
+		Buyer's Information
+			sp_temp_InitializeSPA /
+			sp_AddSPADependent /
+			sp_Buyers  /
+			sp_Search /
+			sp_BPEditOCRD /
+			sp_BPEditCRD1 /
+			sp_EditSPACBDependent /
+			sp_EditSPACBList /
+			sp_temp_ListSPACoBorrower /
+			
+	
+##############################################################################################################
+10-16-2020	 
+
+RPI DREAMS
+	Deployed new Dreams
+		Net Downpayment in TCP Breakdown Computation
+
+##############################################################################################################
+10-22-2020	 	
+	Backend Functions		
+		Buyer's Information
+			DeleteSPADependentByID
+			GetAutoKey
+			BPDependent
+			BPBankAccount
+			BPCharacterRef
+			InsertBPTables
+			BPSPACoBorrower
+			select_temp_Listcrd2
+			gvSPACBEdit_Click
+	Stored Procedures
+		Buyer's Information
+			sp_BusinessPartner
+			sp_BPDependent
+			sp_BPBankAccount
+			sp_BPCharacterRef
+			
+##############################################################################################################
+10-24-2020	 			
+	Backend Functions
+		Quotation Summary	
+			GetQuotationList
+			GetBanks
+			GetCreditPaymentMethod
+			GetReportPerGroup
+			GetGLAccounts
+			GetBranch
+			GetReservationPayments
+			btnYes_Click
+			SearchQuotationList
+			SearchGLAccounts
+			GetCreditCards
+		Assessment
+			BuyersAssessment
+			GetBuyersProject
+			GetDownPayments
+			btnYes_Click
+		House Construction
+			ForHouseConstruction
+		Dashboard 
+			Page_Load
+			gvProjectList_RowCommand
+			btnLotPreview_ServerClick
+			GetHouseStatus
+			bGenerate_ServerClick
+			GetHouseModel
+			GetHousePicture
+		Quotation
+			RefreshSalesList
+			LoadEmpList
+			GetCompSheet
+	Stored Procedure
+		Quotation Summary	
+			sp_QuotationList
+			GetBanks
+			GetCreditPaymentMethod
+			GetReportPerGroup
+			GetGLAccounts
+			GetBranch
+			GetReservationPayments
+			sp_SearchQuotation
+			SearchGLAccounts
+			GetCreditCards
+		Assessment
+			BuyersAssessment
+			GetBuyersProject
+			DownPayments
+		House Construction
+			ForHouseConstruction
+		Dashboard
+			sp_GetHouseStatus
+			sp_GetHouseModel
+			sp_GetHousePicture
+		Quotation
+			sp_GetQuotation (ONGOING)
+			sp_GetCompSheet (ONGOING)
+			sp_GetListOfEmployees 
+
+##############################################################################################################
+10-26-2020	 				
+	Backend Functions
+		Quotation
+			bNatureofEmp_ServerClick
+			Select
+			GetUFD1Name	
+			bSelect_Click	
+			bSearch_ServerClick	
+			GetQuotationByID	
+			GetProjectDetails
+			bSelectBuyer_Click
+			GetDPTermsSAP
+			GetLTermsSAP
+			GetDPDays
+			bSelectProject_Click
+			SQPayment
+			SetListOfEmployees
+			Quotation
+			tNextHouseDetails_Click
+			GetPaymentTerms
+	Stored Procedure
+		Quotation
+			sp_GetQuotationByID
+			sp_GetDPTermsSAP
+			sp_GetLTermsSAP
+			sp_GetDPDays
+			sp_SQPayment
+			sp_SetListOfEmployees
+			sp_SQModify
+			sp_Quotation (ONGOING)
+
+			
+##############################################################################################################
+10-27-2020				
+	Backend Functions
+		Quotation			
+			bLot_ServerClick
+			bGenerate_ServerClick
+			SetColorByProj
+			LeadBusinessPartner
+			SQDeleteLeads
+			bSize_ServerClick
+			LoadFromFindBtn
+			IFExistBP
+			bSelectBP_Click
+			PaymentBreakdown
+			btnNextQuick_Click
+			PaymentBreakdownBankPagibig
+			btnSelectEmpList_Click
+			btnSearchEmpList_ServerClick
+			bSearchBuyer_Click
+	Stored Procedure
+		Quotation			
+			sp_GetPaymentTerms_OB
+			sp_Quotation
+			sp_LeadBusinessPartner
+			sp_GetBPbyCardCode
+			sp_PaymentBreakdown
+			sp_PaymentBreakdownBankPagibig
+			sp_GetHouseSize
+			sp_GetFeature
+			sp_GetBP
+			sp_Search
+			
+##############################################################################################################
+10-28-2020				
+	TESTING OF CONVERTED MODULES
+		Projects
+			Adjusted table format
+				OPRJ and PRJ1 - from VARBINARY to BLOB
+			Backend
+				GetLot_JSON
+				GetMapMarkers_JSON
+				BlockPreview
+				GetProjectImage
+				GetAvailableLot_JSON
+			Stored Proc
+				getLotMap
+				getMapMarkers
+				sp_JSON_AvailableLot
+				UpdateImageProjectBlock (Updated image data type to blob)
+			
+##############################################################################################################
+10-29-2020						
+	TESTING OF CONVERTED MODULES
+		Quotation
+			Populating Lists when adding new Customer
+		Stored Proc
+			sp_GetCompSheet
+				-Hard coded SAP Schema name
+			
+##############################################################################################################
+10-30-2020					
+	Stored Proc
+		sp_GetCompSheet (Hard Coded Schema name)
+		sp_GetPaymentTerms_OB (Hard Coded Schema name) 
+			
+##############################################################################################################
+11-03-2020								
+	Testing the converted version		
+		Fixed sp_GetCompSheet (date problem)
+		sp_PaymentBreakdown (add truncate and drop for temp table)	
+		Quotation 
+			-Add and Update transactions DONE
+##############################################################################################################
+11-04-2020		
+	MDC
+		Buyer's Ledger Support -- DONE
+			A specific transaction is missing in DREAMS Addon DB but uploaded in SAP
+				Re uploaded the transaction via OB Uploader 
+	
+	ABROWN
+		Quotation -- DONE
+			Found small bugs, adjusted
+		User Management -- DONE
+			Adding new User
+			Updating new User
+			Applying authorization/role
+			Aplying which modules are only available
+			Uploaded ROLES
+		Document Requirements DONE
+			Applying the required document to a specific authorization/role 
+		General Setup
+			Status -- DONE
+				Application of Color
+			Valid Values -- DONE
+				Loading Valid Values
+				Updating Valid Values
+			Financing Scheme -- DONE
+				Deleting and Adding
+			Document Requirements -- DONE
+				List of Documents
+				Adding Document 
+				Deleting Document
+			User Roles -- DONE
+				Deleting and Adding 
+				
+				
+##############################################################################################################
+11-06-2020					
+	ABCI - Internal Meeting	with Ralph and Gen
+		Adjustments for ABCI DREAMS
+			External - Broker Accreditation ONGOING
+
+##############################################################################################################
+12-2-2020					
+	ABCI
+		Email Template
+		Authorization
+			Added Broker Approval
+		Updated Editing of Broker Information by SALES Users
+			Found bugs on saving and updating Sof Sales Person and Shared Details 
+
+
+##############################################################################################################
+12-11-2020	
+	ABCI
+		QUOTATION
+			Additional Field : Loan Type
+				Get list from SAP "@LOANTYPE" 
+			DP Terms 
+				Due date will be based on Reservation Date
+				This will be updated upon receiving Reservation Payment with 1 month gap 
+			LB Terms
+				Will base on LB Due Date
+			Banks
+				Load Accredited Banks to Banks Field
+		
+		
+			
+hana.GetConnection("SAOHana")
+ConfigurationManager.AppSettings["HANADatabase"]
+cmd.Parameters.AddWithValue("Database", $"{ConfigurationManager.AppSettings["HANADatabase"]}");
+  
+
+LIST OF ALL SPs WITH HARD CODED DATABASE NAME
+-GetItemDetails
+-sp_GetCompSheet
+-sp_GetPaymentTerms_OB
+
+
+
