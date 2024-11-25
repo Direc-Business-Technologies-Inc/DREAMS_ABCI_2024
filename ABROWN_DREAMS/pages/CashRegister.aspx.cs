@@ -4616,7 +4616,7 @@ namespace ABROWN_DREAMS
 									   tSurChargeDate.Text,
 
 									   //2023-06-13 : ADD CONTRACTSTATUS -- CONSIDERING ADVANCE PAYMENT / RESTRUCTURING
-									   "",
+									   "Open",
 
 									   out PaymentEntry, //36
 									   out Message,
@@ -10988,7 +10988,8 @@ namespace ABROWN_DREAMS
 	                                (SELECT SUM(IFNULL(x.""Debit"",0)) FROM JDT1 x WHERE x.""TransId"" = A.""TransId"" AND ifnull(x.""Debit"",0) > 0) ""Debit"", 
 	                                (SELECT DISTINCT x.""ShortName"" FROM JDT1 x WHERE x.""TransId"" = A.""TransId"" AND ifnull(x.""Debit"",0) = 0) ""ShortName"",
 	                                (SELECT DISTINCT x.""Account"" FROM JDT1 x WHERE x.""TransId"" = A.""TransId"" AND ifnull(x.""Debit"",0) = 0 ) ""CreditAccount"",
-	                                (SELECT SUM(IFNULL(x.""Credit"",0)) FROM JDT1 x WHERE x.""TransId"" = A.""TransId"" AND ifnull(x.""Debit"",0) = 0) ""Credit""
+	                                (SELECT SUM(IFNULL(x.""Credit"",0)) FROM JDT1 x WHERE x.""TransId"" = A.""TransId"" AND ifnull(x.""Debit"",0) = 0) ""Credit"",
+									A.""U_CardCode""
 	                            FROM
 		                            OJDT A INNER JOIN
 		                            ORCT B ON A.""U_ORNo"" = (CASE WHEN IFNULL(B.""U_ORNo"",'') <> '' THEN B.""U_ORNo"" 
@@ -11028,7 +11029,13 @@ namespace ABROWN_DREAMS
 						string ProjectCode = DataAccess.GetData(dtJE, 0, "Project", "").ToString();
 						string Block = DataAccess.GetData(dtJE, 0, "U_BlockNo", "").ToString();
 						string Lot = DataAccess.GetData(dtJE, 0, "U_LotNo", "").ToString();
-						string SAPCardCode = DataAccess.GetData(dtJE, 0, "ShortName", "").ToString();
+						//2024-11-20 : GET U_CARDCODE INSTEAD OF JE ROWS
+						//string SAPCardCode = DataAccess.GetData(dtJE, 0, "ShortName", "").ToString();
+						string SAPCardCode = DataAccess.GetData(dtJE, 0, "U_CardCode", "").ToString();
+
+						//2024-11-20 : GET SHORTNAME 
+						string ShortName = DataAccess.GetData(dtJE, 0, "ShortName", "").ToString();
+
 
 						string DebitAccount = DataAccess.GetData(dtJE, 0, "DebitAccount", "").ToString();
 						double Debit = Convert.ToDouble(DataAccess.GetData(dtJE, 0, "Debit", "0").ToString());
@@ -11043,7 +11050,7 @@ namespace ABROWN_DREAMS
 															0, "", //6
 															"", Block, //8
 															Lot, CreditAccount, //10 
-															DebitAccount, "", //12
+															DebitAccount, ShortName, //12
 															JECode, DocNum, //14
 															"", "", //16
 															"", CancelledIncomingPaymentDocDate, //18

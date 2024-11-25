@@ -6393,7 +6393,7 @@ namespace ABROWN_DREAMS.Services
 				else if (Tag == "RNLT")
 				{
 					//Lines.Add("ShortName", BPCode);
-					Lines.Add("ShortName", BPCode);
+					Lines.Add("ShortName", Account3);
 					Lines.Add("AccountCode", Account1);
 					Lines.Add("ProjectCode", ProjectCode);
 					Lines.Add("U_SONo", SODocNum);
